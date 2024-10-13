@@ -1,0 +1,21 @@
+# 1. Start from the Node.js 20.x.x LTS image
+FROM node:20-alpine
+
+# 2. Set the working directory in the container to /app
+WORKDIR /app
+
+# 3. Copy the package.json and yarn.lock files first (for better caching)
+# This will allow Docker to cache the dependencies
+COPY package.json yarn.lock ./
+
+# 4. Install application dependencies using Yarn with --frozen-lockfile
+RUN yarn install --frozen-lockfile
+
+# 5. Copy the rest of the application code into the /app directory
+COPY . .
+
+# 6. Expose port 3000 to make the application accessible
+EXPOSE 3000
+
+# 7. Start the application using `yarn start` when the container starts
+CMD ["yarn", "start"]

@@ -1,0 +1,23 @@
+version: '3'  # Specify the version of Docker Compose
+
+services:
+  webapp:
+    image: guillaumeverlodt/webapp:latest  # Use the image from Docker Hub
+    ports:
+      - "3000:3000"                   # Map port 3000 on the host to port 3000 in the container
+    restart: unless-stopped           # Restart policy
+    environment:
+      MYSQL_URL: mysql://user:password@database:3306/animals  # Set the database URL
+
+  database:
+    image: mysql:latest                # Use the official MySQL image
+    volumes:
+      - db_data:/var/lib/mysql         # Named volume for persistent data
+    environment:
+      MYSQL_ROOT_PASSWORD: root        # Set the MySQL root password
+      MYSQL_USER: user                  # Set the database user
+      MYSQL_PASSWORD: password          # Set the database user password
+      MYSQL_DATABASE: animals           # Create the database
+
+volumes:
+  db_data:                             # Define the named volume

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  webapp:
+    image: webapp
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      MYSQL_URL: mysql://user:password@database/animals
+    restart: unless-stopped
+    volumes:
+      - ./database:/app/database
+    depends_on:
+      database:
+        condition: service_healthy  # Wait until the database is healthy
+
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: animals
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  test:
+    image: webapp
+    environment:
+      API_URL: http://webapp:3000
+    depends_on:
+      - webapp
+    command: yarn test
+
+volumes:
+  mysql_data:
