@@ -1,4 +1,5 @@
-import { eslintrc } from '@eslint/js';
+import eslintPlugin from '@eslint/js';
+const { eslintrc } = eslintPlugin;
 
 export default [
   eslintrc(),
