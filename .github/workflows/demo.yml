@@ -1,16 +1,14 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Build and test
 on:
   push:
     branches:
       - main
+
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository code
+      # Stap om de repository code te check out-en
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "This job's status is ${{ job.status }}."
