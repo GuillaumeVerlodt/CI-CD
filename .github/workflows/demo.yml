@@ -14,16 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Stap 2: Installeer Node.js versie 20
+      # Stap 2: Navigeer naar de juiste directory
+      - name: Change directory to webapp
+        run: cd ../../webapp
+
+      # Stap 3: Installeer Node.js versie 20
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      # Stap 3: Installeer dependencies met Yarn
+      # Stap 4: Installeer dependencies met Yarn
       - name: Install dependencies
         run: yarn install
+        working-directory: ./webapp
 
-      # Stap 4: Voer de linter uit
+      # Stap 5: Voer de linter uit
       - name: Run linter
         run: yarn lint
+        working-directory: ./webapp
