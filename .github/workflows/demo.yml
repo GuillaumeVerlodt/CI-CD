@@ -16,7 +16,7 @@ jobs:
 
       # Stap 2: Navigeer naar de juiste directory
       - name: Change directory to webapp
-        run: cd ../../webapp
+        run: cd webapp
 
       # Stap 3: Installeer Node.js versie 20
       - name: Set up Node.js
