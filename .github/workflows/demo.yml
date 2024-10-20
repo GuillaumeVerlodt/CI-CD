@@ -43,5 +43,5 @@ jobs:
         with:
           context: ./webapp   # Set context to webapp directory
           file: ./webapp/Dockerfile   # Dockerfile is inside webapp directory
-          push: true   # Push image to Docker Hub
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webapp:latest
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webapp:latest   # Tag the image with Docker Hub username and webapp
