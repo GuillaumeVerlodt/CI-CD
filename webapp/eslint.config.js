@@ -5,13 +5,12 @@ export default [
       ecmaVersion: 2021,
       sourceType: 'module',
       globals: {
-        // Indien je daadwerkelijk specifieke globale variabelen hebt, plaats ze hier
+        // Definieer hier de globale variabelen
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
       },
-    },
-    env: {
-      es2021: true,
-      node: true,
-      mocha: true,
     },
     rules: {
       'indent': ['error', 2, { SwitchCase: 1 }],
