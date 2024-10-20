@@ -3,7 +3,7 @@ node_modules/
 
 # Ignore Docker-related files
 .dockerignore
-dockerfile
+Dockerfile
 docker-compose.yml
 docker-compose-sqlite.yml
 

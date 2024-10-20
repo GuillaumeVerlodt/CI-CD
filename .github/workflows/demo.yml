@@ -33,3 +33,12 @@ jobs:
       - name: Run linter
         run: yarn lint
         working-directory: ./webapp
+
+      # Stap 6: Build de Docker-image
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: guillaumeverlodt/webapp:latest
