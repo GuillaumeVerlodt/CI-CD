@@ -10,35 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Stap 1: Check de repository code uit
+      # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Stap 2: Navigeer naar de juiste directory
-      - name: Change directory to webapp
-        run: cd webapp
-
-      # Stap 3: Installeer Node.js versie 20
+      # Step 2: Set up Node.js version 20
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      # Stap 4: Installeer dependencies met Yarn
+      # Step 3: Install dependencies with Yarn
       - name: Install dependencies
         run: yarn install
         working-directory: ./webapp
 
-      # Stap 5: Voer de linter uit
+      # Step 4: Run linter
       - name: Run linter
         run: yarn lint
         working-directory: ./webapp
 
-      # Stap 6: Build de Docker-image
+      # Step 5: Build Docker image from the webapp directory
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: webapp\Dockerfile
+          context: ./webapp   # Set the context to the webapp directory
+          file: ./webapp/Dockerfile   # Dockerfile is inside the webapp directory
           push: false
           tags: guillaumeverlodt/webapp:latest
