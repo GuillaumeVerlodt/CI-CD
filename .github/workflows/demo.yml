@@ -37,7 +37,12 @@ jobs:
         run: yarn lint
         working-directory: ./webapp
 
-      # Step 6: Build and push Docker image
+      # Step 6: Run tests
+      - name: Run tests
+        run: yarn test
+        working-directory: ./webapp
+
+      # Step 7: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
